@@ -1,7 +1,7 @@
 const Router = ('express');
 const sessionsController = ('../controllers/sessions.controller.js');
 
-const router = Router();
+const router = express.Router();
 
 router.post('/register',sessionsController.register);
 router.post('/login',sessionsController.login);

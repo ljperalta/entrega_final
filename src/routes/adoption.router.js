@@ -1,7 +1,7 @@
 const Router = require('express');
 const adoptionsController = require('../controllers/adoptions.controller.js');
 
-const router = Router();
+const router = express.Router();
 
 router.get('/',adoptionsController.getAllAdoptions);
 router.get('/:aid',adoptionsController.getAdoption);
