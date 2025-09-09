@@ -1,12 +1,13 @@
 const express = require('express');
 const routes = require("./routes/index.js");
+const bodyParser = require('body-parser');
 const listEndpoints = require('express-list-endpoints');
 const errorHandler = require('./utils/errorHandler.js');
 require('./bd/conexion.js');
 
 const app = express();
 
-app.use(express.json());
+app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/", routes);

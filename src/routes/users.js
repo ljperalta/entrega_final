@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { petsService, usersService } = require("../services/index.js");
 const { generatePets, generateUsers } = require('../utils/mocking.js');
+const usersController = require("../controllers/users.controller.js");
 
 router.get('/', async (req, res, next) => {
     try {
@@ -58,5 +59,9 @@ router.post("/generateData/users/:cantU/pets/:cantP", async (req, res) => {
         res.status(500).json({ status: 'error', error: error.message });
     }
 });
+
+router.get('/:uid', usersController.getUser);
+router.put('/:uid', usersController.updateUser);
+router.delete('/:uid', usersController.deleteUser);
 
 module.exports = router;

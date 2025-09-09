@@ -1,0 +1,207 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "User API",
+        "version": "1.0.0",
+        "description": "API para gestionar usuarios, incluyendo operaciones de CRUD y generación de datos mock."
+    },
+    "basePath": "/api/users",
+    "paths": {
+        "/": {
+            "get": {
+                "summary": "Obtener todos los usuarios",
+                "description": "Devuelve una lista completa de usuarios registrados en el sistema.",
+                "responses": {
+                    "200": {
+                        "description": "Lista de usuarios obtenida correctamente",
+                        "schema": {
+                        "type": "array",
+                        "items": { "$ref": "#/definitions/User" }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno al obtener usuarios"
+                    }
+                }
+            }
+        },
+        "/generateData/{cant}": {
+            "get": {
+                "summary": "Generar mascotas mock",
+                "description": "Genera una cantidad específica de mascotas falsas para pruebas.",
+                "parameters": [
+                    {
+                        "name": "cant",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "description": "Cantidad de mascotas a generar"
+                    }
+                ],
+                "responses": {
+                "200": {
+                    "description": "Mascotas generadas exitosamente",
+                    "schema": {
+                        "type": "array",
+                        "items": { "$ref": "#/definitions/Pet" }
+                    }
+                }
+                }
+            }
+        },
+        "/generateData/users/{cantU}/pets/{cantP}": {
+            "post": {
+                "summary": "Generar usuarios y mascotas mock",
+                "description": "Crea usuarios y mascotas falsas e inserta los datos en la base de datos.",
+                "parameters": [
+                {
+                    "name": "cantU",
+                    "in": "path",
+                    "required": true,
+                    "type": "integer",
+                    "description": "Número de usuarios a crear"
+                },
+                {
+                    "name": "cantP",
+                    "in": "path",
+                    "required": true,
+                    "type": "integer",
+                    "description": "Número de mascotas a crear"
+                }
+                ],
+                "responses": {
+                "200": {
+                    "description": "Datos generados e insertados correctamente",
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "status": { "type": "string" },
+                            "usersInserted": { "type": "integer" },
+                            "petsInserted": { "type": "integer" }
+                        }
+                    }
+                },
+                "500": {
+                    "description": "Error interno al generar datos"
+                }
+                }
+            }
+        },
+        "/{uid}": {
+            "get": {
+                "summary": "Obtener usuario por ID",
+                "parameters": [
+                {
+                    "name": "uid",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "description": "ID del usuario a consultar"
+                }
+                ],
+                "responses": {
+                "200": {
+                    "description": "Usuario encontrado",
+                    "schema": { "$ref": "#/definitions/User" }
+                },
+                "404": {
+                    "description": "Usuario no encontrado"
+                }
+                }
+            },
+            "put": {
+                "summary": "Actualizar un usuario",
+                "parameters": [
+                {
+                    "name": "uid",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "description": "ID del usuario a actualizar"
+                },
+                {
+                    "in": "body",
+                    "name": "body",
+                    "description": "Datos a actualizar",
+                    "schema": { "$ref": "#/definitions/User" }
+                }
+                ],
+                "responses": {
+                "200": {
+                    "description": "Usuario actualizado correctamente"
+                },
+                "404": {
+                    "description": "Usuario no encontrado"
+                }
+                }
+            },
+            "delete": {
+                "summary": "Eliminar un usuario",
+                "parameters": [
+                {
+                    "name": "uid",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "description": "ID del usuario a eliminar"
+                }
+                ],
+                "responses": {
+                "200": {
+                    "description": "Usuario eliminado correctamente"
+                },
+                "404": {
+                    "description": "Usuario no encontrado"
+                }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "User": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string",
+                    "description": "Identificador único del usuario (ObjectId de MongoDB)",
+                    "example": "64f8c7d6e13e2b45a9c12345"
+                },
+                "first_name": {
+                    "type": "string",
+                    "description": "Nombre del usuario",
+                    "example": "Juan"
+                },
+                "last_name": {
+                    "type": "string",
+                    "description": "Apellido del usuario",
+                    "example": "Pérez"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "Correo electrónico único del usuario",
+                    "example": "juan.perez@example.com"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "Contraseña encriptada del usuario",
+                    "example": "$2b$10$abcdefghijklmnopqrstuv"
+                },
+                "role": {
+                    "type": "string",
+                    "enum": ["user", "admin"],
+                    "description": "Rol del usuario en el sistema",
+                    "example": "user"
+                },
+                "pets": {
+                    "type": "array",
+                    "description": "Listado de IDs de mascotas asociadas al usuario",
+                    "items": {
+                        "type": "string",
+                        "example": "64f8c8f0e13e2b45a9c67890"
+                    }
+                }
+            },
+            "required": ["first_name", "last_name", "email", "password"]
+        }
+    }
+}
