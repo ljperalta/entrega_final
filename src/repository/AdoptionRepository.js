@@ -1,4 +1,4 @@
-const GenericRepository = ("./GenericRepository.js");
+const GenericRepository = require("./GenericRepository.js");
 
 class AdoptionRepository extends GenericRepository {
     constructor(dao){
