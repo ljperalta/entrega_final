@@ -1,4 +1,4 @@
-const Router = require('express');
+const express = require('express');
 const adoptionsController = require('../controllers/adoptions.controller.js');
 
 const router = express.Router();
