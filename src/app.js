@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/", routes);
-console.table(listEndpoints(routes));
+//console.table(listEndpoints(routes));
 app.use(errorHandler);
 
 module.exports = app;

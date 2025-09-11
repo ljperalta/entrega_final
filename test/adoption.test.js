@@ -1,4 +1,5 @@
 const request = require("supertest");
+const { expect } = require("chai");
 const app = require("../src/app.js");
 
 describe("Adoptions API", () => {
@@ -17,9 +18,9 @@ describe("Adoptions API", () => {
 
   it("debería obtener todas las adopciones", async () => {
     const res = await request(app)
-    .get("/api/adoptions");
-    expect(res.statusCode).toBe(200);
-    expect(res.body).toHaveProperty("payload");
-    expect(Array.isArray(res.body.payload)).toBe(true);
+    .get("/api/adoption");
+    expect(res.statusCode).to.equal(200);
+    expect(res.body).to.have.property("payload");
+    expect(Array.isArray(res.body.payload)).to.be.true;
   });
 });

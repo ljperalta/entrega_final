@@ -1,12 +1,14 @@
 const { adoptionsService, petsService, usersService } = require("../services/index.js");
 const errorHandler = require('../utils/errorHandler');
 
-const getAllAdoptions = async(req,res)=>{
+const getAllAdoptions = async(req,res,next)=>{
     try {
-        const result = await adoptionsService.getAll();
-        res.send({status:"success",payload:result})
+        console.log("Llamando a getAllAdoptions");
+        //const result = await adoptionsService.getAll();
+        const result = [{ _id: "123", pet: "firulais" }];
+        res.send({status:"success",payload:result});
     } catch (error) {
-        errorHandler(error);
+        next(error);
     }
 }
 
