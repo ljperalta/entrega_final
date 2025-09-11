@@ -16,7 +16,8 @@ describe("Adoptions API", () => {
   });
 
   it("debería obtener todas las adopciones", async () => {
-    const res = await request(app).get("/api/adoptions");
+    const res = await request(app)
+    .get("/api/adoptions");
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty("payload");
     expect(Array.isArray(res.body.payload)).toBe(true);
