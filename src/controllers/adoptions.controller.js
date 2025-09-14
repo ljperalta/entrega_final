@@ -4,8 +4,8 @@ const errorHandler = require('../utils/errorHandler');
 const getAllAdoptions = async(req,res,next)=>{
     try {
         console.log("Llamando a getAllAdoptions");
-        //const result = await adoptionsService.getAll();
-        const result = [{ _id: "123", pet: "firulais" }];
+        const result = await adoptionsService.getAll();
+        //const result = [{ _id: "123", pet: "firulais" }];
         res.send({status:"success",payload:result});
     } catch (error) {
         next(error);
@@ -15,6 +15,7 @@ const getAllAdoptions = async(req,res,next)=>{
 const getAdoption = async(req,res)=>{
     try {
         const adoptionId = req.params.aid;
+        console.log("Llamando a getAdoption con ID:", adoptionId);
         const adoption = await adoptionsService.getBy({_id:adoptionId})
         if(!adoption) return res.status(404).send({status:"error",error:"Adoption not found"})
         res.send({status:"success",payload:adoption})
