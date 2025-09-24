@@ -1,5 +1,6 @@
 const { adoptionsService, petsService, usersService } = require("../services/index.js");
 const errorHandler = require('../utils/errorHandler');
+const { Mongoose } = require("mongoose");  
 
 const getAllAdoptions = async(req,res,next)=>{
     try {
