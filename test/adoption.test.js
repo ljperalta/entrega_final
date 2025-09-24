@@ -19,18 +19,18 @@ describe("Adoptions API", function() {
           console.error("Error connecting to MongoDB for testing:", err);
         });
     });
-  // it("debería crear una adopción", async () => {
-  //   const res = await request(app)
-  //     .post("/api/adoption")
-  //     .send({
-  //       userId: "64f8c7d6e13e2b45a9c12345",
-  //       petId: "64f8c8f0e13e2b45a9c67890"
-  //     });
+  it("debería crear una adopción", async () => {
+    const res = req
+      .post("/api/adoption")
+      .send({
+        userId: "68d47ddfd7015f8a9efb74f3",
+        petId: "68d47ddfd7015f8a9efb74f8"
+      });
 
-  //   expect(res.statusCode).to.equal(201);
-  //   expect(res.body).to.have.property("status", "success");
-  //   expect(res.body).to.have.property("payload");
-  // });
+    //expect(res.statusCode).to.equal(201);
+    //expect(res.body).to.have.property("status", "success");
+    //expect(res.body).to.have.property("payload");
+  });
 
   it("debería devolver la adopcion con el id ingresado", async () => {
     const adoptionId = "68c2156ced8925d95283248f";
